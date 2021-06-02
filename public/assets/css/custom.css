@@ -1,0 +1,45 @@
+/**
+ *
+ * You can write your CSS code here, DO NOT touch the default JavaScript file
+ * because it will make it harder for you to update.
+ * 
+ */
+
+/*# sourceMappingURL=custom.css.map */
+
+.bg-gradient-success {
+    background: linear-gradient(180deg, #245501, #538d22);
+}
+
+.modal-body iframe {
+    width: 100% !important;
+    height: 30rem;
+}
+
+.not-found {
+    background: radial-gradient(
+        circle,
+        rgba(238, 160, 160, 0.5) 0%,
+        rgba(241, 183, 183, 0.293) 50%,
+        rgba(211, 211, 211, 0) 100%
+    );
+    border-radius: 5px;
+    width: 50%;
+}
+
+.editSlide:hover .push {
+    display: flex;
+}
+
+#gear {
+    animation: muter 3s linear infinite;
+}
+
+@keyframes muter {
+    0% {
+        transform: rotate(10deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
