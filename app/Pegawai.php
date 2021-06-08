@@ -11,4 +11,8 @@ class Pegawai extends Model
     protected $fillable = [
         'nama','nip','golongan','jabatan','pangkat'
     ];
+
+    public function nilai(){
+        return $this->hasOne(Nilai::class);
+    }
 }

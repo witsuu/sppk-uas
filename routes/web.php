@@ -12,15 +12,20 @@
 */
 
 Route::get('/','HomeController@index')->name('dashboard');
-Route::get('/kriteria','HomeController@kriteria')->name('kriteria');
-Route::post('/kriteria/edit','HomeController@editKriteria')->name('edit_kriteria');
-Route::put('/kriteria/edit','HomeController@storeEditBobot')->name('store_edit_bobot');
-Route::get('/pegawai','HomeController@pegawai')->name('pegawai');
-Route::get('/pegawai/baru','HomeController@tambahPegawai')->name('tambah_pegawai');
-Route::post('/pegawai/baru/store','HomeController@storePegawai')->name('store_pegawai');
-Route::post('/pegawai/edit','HomeController@editPegawai')->name('edit_pegawai');
-Route::put('/pegawai/edit','HomeController@storeEditPegawai')->name('store_edit_pegawai');
-Route::delete('/pegawai/delete','HomeController@deletePegawai')->name('delete_pegawai');
-Route::get('/penilaian','HomeController@penilaian')->name('penilaian');
+Route::get('kriteria','HomeController@kriteria')->name('kriteria');
+Route::post('kriteria/edit','HomeController@editKriteria')->name('edit_kriteria');
+Route::put('kriteria/edit','HomeController@storeEditBobot')->name('store_edit_bobot');
+Route::get('pegawai','HomeController@pegawai')->name('pegawai');
+Route::get('pegawai/baru','HomeController@tambahPegawai')->name('tambah_pegawai');
+Route::post('pegawai/baru/store','HomeController@storePegawai')->name('store_pegawai');
+Route::post('pegawai/edit','HomeController@editPegawai')->name('edit_pegawai');
+Route::put('pegawai/edit','HomeController@storeEditPegawai')->name('store_edit_pegawai');
+Route::delete('pegawai/delete','HomeController@deletePegawai')->name('delete_pegawai');
+Route::get('pegawai/input-nilai','HomeController@showInputNilai')->name('input_nilai');
+Route::post('pegawai/input-nilai','HomeController@storeInputNilai')->name('input_nilai');
+Route::post('pegawai/edit-nilai','HomeController@editNilai')->name('edit_nilai');
+Route::put('pegawai/edit-nilai','HomeController@storeEditNilai')->name('edit_nilai');
+Route::delete('pegawai/delete-nilai','HomeController@deleteNilai')->name('delete_nilai');
+Route::get('penilaian','HomeController@penilaian')->name('penilaian');
 
 Auth::routes();

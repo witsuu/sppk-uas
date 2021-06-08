@@ -15,13 +15,13 @@ class CreateNilaiTable extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('id_pegawai');
+            $table->unsignedBigInteger('pegawai_id');
             $table->string('C1');
             $table->string('C2');
             $table->string('C3');
             $table->string('C4');
             $table->string('C5');
-            $table->foreign('id_pegawai')->references('id')->on('pegawai')->onDelete('cascade');
+            $table->foreign('pegawai_id')->references('id')->on('pegawai')->onDelete('cascade');
             $table->timestamps();
         });
     }

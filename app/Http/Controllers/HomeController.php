@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Kriteria;
 use App\Pegawai;
 use App\Nilai;
+use DB;
 
 class HomeController extends Controller
 {
@@ -66,7 +67,10 @@ class HomeController extends Controller
 
         $pegawais = Pegawai::latest()->get();
 
-        $nilais = Nilai::latest()->get();
+        $nilais = DB::table('nilai')
+        ->select('nilai.*','pegawai.nama')
+        ->join('pegawai','nilai.pegawai_id','pegawai.id')
+        ->get();
 
         return view('pages.pegawai',compact('page','pegawais','nilais'));
     }
@@ -139,9 +143,84 @@ class HomeController extends Controller
         return redirect()->route('pegawai')->with('success','Pegawai berhasil dihapus');
     }
 
+    public function showInputNilai(){
+        $page = "pegawai";
+
+        $kriterias = Kriteria::all();
+        $pegawais = Pegawai::all();
+
+        return view('pages.input_nilai', compact('page','kriterias','pegawais'));
+    }
+
+    public function storeInputNilai(Request $req){
+        $req->validate([
+            'pegawai_id'=>'required|unique:nilai',
+        ]);
+
+        Nilai::create([
+            'pegawai_id' => $req->pegawai_id,
+            'C1' => $req->C1,
+            'C2' => $req->C2,
+            'C3' => $req->C3,
+            'C4' => $req->C4,
+            'C5' => $req->C5,
+        ]);
+
+        return redirect()->route('pegawai')->with('success','Nilai Berhasil ditambah');
+    }
+
+    public function editNilai(Request $req){
+        $page = "pegawai";
+        $id = $req->id;
+
+        $nilai = Nilai::find($id);
+        $pegawais = Pegawai::all();
+
+        return view('pages.edit_nilai',compact('page','nilai','pegawais'));
+    }
+
+    public function storeEditNilai(Request $req){
+        $id = $req->id;
+
+        $nilai = Nilai::find($id);
+
+        $nilai->C1 = $req->c1;
+        $nilai->C2 = $req->c2;
+        $nilai->C3 = $req->c3;
+        $nilai->C4 = $req->c4;
+        $nilai->C5 = $req->c5;
+
+        $nilai->save();
+
+        return redirect()->route('pegawai')->with('success','Nilai pegawai berhasil diubah');
+    }
+
+    public function deleteNilai(Request $req){
+        $id = $req->id;
+
+        $nilai = Nilai::find($id);
+
+        $nilai->delete();
+
+        return redirect()->route('pegawai')->with('success','Nilai pegawai berhasil dihapus');
+    }
+
     public function penilaian(){
         $page="nilai";
 
-        return view('pages.penilaian',compact('page'));
+        $nilais = DB::table('nilai')
+        ->select('nilai.*','pegawai.nama')
+        ->join('pegawai','nilai.pegawai_id','pegawai.id')
+        ->get();
+
+        $kriterias = Kriteria::all();
+
+        $maxC1 = Nilai::maxValue('C1');
+        $maxC2 = Nilai::maxValue('C2');
+        $maxC3 = Nilai::maxValue('C3');
+        $maxC4 = Nilai::maxValue('C4');
+        $maxC5 = Nilai::maxValue('C5');
+
+        return view('pages.penilaian',compact('page','nilais','maxC1','maxC2','maxC3','maxC4','maxC5','kriterias'));
     }
 }
