@@ -45,7 +45,6 @@
                     <li>
                         <a href={{ route('logout') }} class="btn btn-danger mr-2" data-toggle="modal"
                             data-target="#logout">
-                            @method('post')
                             <i class="fas fa-sign-out-alt"></i> KELUAR
                         </a>
                     </li>
@@ -119,7 +118,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary w-100" data-dismiss="modal">TUTUP</button>
-                    <form action="{{ route('logout') }}" method="GET" class="w-100">
+                    <form action="{{ route('logout') }}" method="POST" class="w-100">
                         @csrf
                         <button type="submit" class="btn btn-danger w-100">LOGOUT</button>
                     </form>

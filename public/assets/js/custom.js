@@ -17,6 +17,5 @@ $("#dataTable").DataTable({
 });
 
 $("#dataTablePenilaian").DataTable({
-    ordering: false,
     info: false,
 });

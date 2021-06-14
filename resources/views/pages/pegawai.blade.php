@@ -87,7 +87,7 @@
             </a>
         </div>
         <div class="card-body">
-            <table id="dataTablePenilaian" class="table table-bordered" style="width: 100%">
+            <table id="dataTable" class="table table-bordered" style="width: 100%">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white">No</th>

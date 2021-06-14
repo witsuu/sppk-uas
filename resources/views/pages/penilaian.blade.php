@@ -12,7 +12,7 @@
             <h4>Data Pegawai</h4>
         </div>
         <div class="card-body">
-            <table id="dataTablePenilaian" class="table table-bordered" style="width: 100%">
+            <table id="dataTable" class="table table-bordered" style="width: 100%">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white">Nama</th>
@@ -43,7 +43,7 @@
             <h4>Hasil Perhitungan Normalisasi</h4>
         </div>
         <div class="card-body">
-            <table id="dataTablePenilaian" class="table table-bordered" style="width: 100%">
+            <table id="dataTable" class="table table-bordered" style="width: 100%">
                 <thead class="bg-primary">
                     <tr>
                         <th class="text-white">Alternatif</th>
@@ -94,6 +94,7 @@
                         <tbody>
                             @php
                             $no=1;
+                            $ranking =array('nama'=>null,'nilai'=>0);
                             @endphp
                             @foreach ($nilais as $nilai)
                             <tr>
@@ -106,26 +107,31 @@
                                 $C3 = $nilai->C3/$maxC3->C3;
                                 $C4 = $nilai->C4/$maxC4->C4;
                                 $C5 = $nilai->C5/$maxC5->C5;
-                                $nilai = 0;
+                                $nilaiTotal = 0;
                                 @endphp
                                 @foreach ($kriterias as $kriteria)
                                 @php
                                 if($kriteria->kode_kriteria == "C1"){
-                                $nilai += $kriteria->bobot*$C1;
+                                $nilaiTotal += $kriteria->bobot*$C1;
                                 }elseif($kriteria->kode_kriteria == "C2"){
-                                $nilai += $kriteria->bobot*$C2;
+                                $nilaiTotal += $kriteria->bobot*$C2;
                                 }elseif($kriteria->kode_kriteria == "C3"){
-                                $nilai += $kriteria->bobot*$C3;
+                                $nilaiTotal += $kriteria->bobot*$C3;
                                 }elseif($kriteria->kode_kriteria == "C4"){
-                                $nilai += $kriteria->bobot*$C4;
+                                $nilaiTotal += $kriteria->bobot*$C4;
                                 }elseif($kriteria->kode_kriteria == "C5"){
-                                $nilai += $kriteria->bobot*$C5;
+                                $nilaiTotal += $kriteria->bobot*$C5;
                                 }
                                 @endphp
                                 @endforeach
-                                <td>{{$nilai}}</td>
+                                <td>{{$nilaiTotal}}</td>
                             </tr>
-                            @endforeach
+                            @php
+                            if($ranking['nilai'] < $nilaiTotal){ $ranking['nama']=$nilai->nama;
+                                $ranking['nilai'] = $nilaiTotal;
+                                }
+                                @endphp
+                                @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -136,7 +142,12 @@
                 <div class="card-header">
                     <h4>Kesimpulan</h4>
                 </div>
-                <div class="card-body"></div>
+                <div class="card-body">
+                    <p>
+                        {!!" Dari hasil perhitungan ranking. Maka, pegawai terbaik adalah
+                        <strong>".$ranking['nama']."</strong> dengan nilai <strong>". $ranking["nilai"]."</strong>" !!}
+                    </p>
+                </div>
             </div>
         </div>
     </div>

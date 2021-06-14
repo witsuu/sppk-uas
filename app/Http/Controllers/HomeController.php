@@ -28,7 +28,10 @@ class HomeController extends Controller
     public function index()
     {
         $page = "dashboard";
-        return view('dashboard', compact('page'));
+
+        $pegawais = Pegawai::latest()->get();
+
+        return view('dashboard', compact('page','pegawais'));
     }
 
     public function kriteria(){
