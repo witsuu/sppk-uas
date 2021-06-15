@@ -82,7 +82,7 @@
                         <li class="nav-item @if ($page=='nilai') active @endif">
                             <a href="{{ route('penilaian') }}" class="nav-link">
                                 <i class="fas fa-book"></i>
-                                <span class="font-weight-bolder">Penilaian/hasil</span>
+                                <span class="font-weight-bolder">Penilaian/Hasil</span>
                             </a>
                         </li>
                     </ul>

@@ -65,11 +65,11 @@
                         $C4 = $nilai->C4/$maxC4->C4;
                         $C5 = $nilai->C5/$maxC5->C5;
                         @endphp
-                        <td>{!!$C1!!}</td>
-                        <td>{{$C2}}</td>
-                        <td>{{$C3}}</td>
-                        <td>{{$C4}}</td>
-                        <td>{{$C5}}</td>
+                        <td>{!!number_format($C1,3,'.',',')!!}</td>
+                        <td>{{number_format($C2,3,'.',',')}}</td>
+                        <td>{{number_format($C3,3,'.',',')}}</td>
+                        <td>{{number_format($C4,3,'.',',')}}</td>
+                        <td>{{number_format($C5,3,'.',',')}}</td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -124,7 +124,7 @@
                                 }
                                 @endphp
                                 @endforeach
-                                <td>{{$nilaiTotal}}</td>
+                                <td>{{number_format($nilaiTotal,3,'.',',')}}</td>
                             </tr>
                             @php
                             if($ranking['nilai'] < $nilaiTotal){ $ranking['nama']=$nilai->nama;
@@ -145,7 +145,8 @@
                 <div class="card-body">
                     <p>
                         {!!" Dari hasil perhitungan ranking. Maka, pegawai terbaik adalah
-                        <strong>".$ranking['nama']."</strong> dengan nilai <strong>". $ranking["nilai"]."</strong>" !!}
+                        <strong>".$ranking['nama']."</strong> dengan nilai
+                        <strong>". $ranking["nilai"]."</strong>" !!}
                     </p>
                 </div>
             </div>
